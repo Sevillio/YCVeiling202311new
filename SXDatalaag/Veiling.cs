@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SXDatalaag
+{
+    public class Veiling
+    {
+        public int Id {  get; set; }
+        public DateTime StartDatumTijd { get; set; }
+        // public enum Veilingstatus { scheduled, open, closed }
+        public int Duratie {  get; set; }
+        public int OpeningsBod { get; set; }
+        public int LaatsteBod { get; set; }
+        public int MinimumBod { get; set; }
+        //public string Veilingstuk { get; set; } 
+    }
+}
