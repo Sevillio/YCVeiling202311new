@@ -19,8 +19,22 @@ namespace Veiling2BE
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
             });
 
-            var app = builder.Build();
+ 
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                                      policy =>
+                                      {
+                                          policy.AllowAnyOrigin()
+                                                              .AllowAnyHeader()
+                                                              .AllowAnyMethod();
+                                      });
+            });
 
+            var app = builder.Build(); // ALLEEN DIT STATEMENT STAAT AL IN JE CODE
+
+            app.UseCors(MyAllowSpecificOrigins);
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
