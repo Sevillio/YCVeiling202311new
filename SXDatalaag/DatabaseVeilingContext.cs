@@ -9,7 +9,8 @@ namespace SXDatalaag
 {
     public class DatabaseVeilingContext:DbContext
     {
-        public DatabaseVeilingContext(DbContextOptions options): base(options) { }
+        public DatabaseVeilingContext(DbContextOptions options) : base(options) { }
         public DbSet<Veiling> Veiling { get; set; }
+        public DbSet<Veilingstuk> Veilingstuk { get; set; }
     }
 }

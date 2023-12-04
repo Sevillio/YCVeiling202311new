@@ -18,12 +18,13 @@ namespace SXDatalaag.Migrations
                     StartDatumTijd = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OpeningsBod = table.Column<int>(type: "int", nullable: false),
                     LaatsteBod = table.Column<int>(type: "int", nullable: false),
-                    MinimumBod = table.Column<int>(type: "int", nullable: false)
+                    MinimumBod = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Veiling", x => x.Id);
                 });
+           
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
