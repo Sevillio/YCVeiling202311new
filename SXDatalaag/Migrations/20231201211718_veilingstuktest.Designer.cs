@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SXDatalaag;
 
@@ -11,9 +12,10 @@ using SXDatalaag;
 namespace SXDatalaag.Migrations
 {
     [DbContext(typeof(DatabaseVeilingContext))]
-    partial class DatabaseVeilingContextModelSnapshot : ModelSnapshot
+    [Migration("20231201211718_veilingstuktest")]
+    partial class veilingstuktest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,12 +47,12 @@ namespace SXDatalaag.Migrations
                     b.Property<DateTime>("StartDatumTijd")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("VeilingstukId")
+                    b.Property<int>("veilingstukId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VeilingstukId");
+                    b.HasIndex("veilingstukId");
 
                     b.ToTable("Veiling");
                 });
@@ -98,14 +100,13 @@ namespace SXDatalaag.Migrations
 
             modelBuilder.Entity("SXDatalaag.Veiling", b =>
                 {
-                    b.HasOne("SXDatalaag.Veilingstuk", null)
-                        .WithMany("Veiling")
-                        .HasForeignKey("VeilingstukId");
-                });
+                    b.HasOne("SXDatalaag.Veilingstuk", "veilingstuk")
+                        .WithMany()
+                        .HasForeignKey("veilingstukId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("SXDatalaag.Veilingstuk", b =>
-                {
-                    b.Navigation("Veiling");
+                    b.Navigation("veilingstuk");
                 });
 #pragma warning restore 612, 618
         }
