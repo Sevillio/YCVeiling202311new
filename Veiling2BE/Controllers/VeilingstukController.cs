@@ -31,6 +31,7 @@ namespace Veiling2BE.Controllers
             veilingstuk.Lengte = 4;
             veilingstuk.Gewicht = 1;
             veilingstuk.Width = 3;
+            veilingstuk.Image = "";
             
             return _mdc.Veilingstuk;
         }
