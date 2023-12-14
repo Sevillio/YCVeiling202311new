@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SXDatalaag;
 
@@ -11,9 +12,10 @@ using SXDatalaag;
 namespace SXDatalaag.Migrations
 {
     [DbContext(typeof(DatabaseVeilingContext))]
-    partial class DatabaseVeilingContextModelSnapshot : ModelSnapshot
+    [Migration("20231212161921_Veilingstuk")]
+    partial class Veilingstuk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,10 +41,6 @@ namespace SXDatalaag.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -134,6 +132,9 @@ namespace SXDatalaag.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Beschrijving")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -159,6 +160,8 @@ namespace SXDatalaag.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
 
                     b.ToTable("Veilingstuk");
                 });
@@ -191,6 +194,17 @@ namespace SXDatalaag.Migrations
                         .IsRequired();
 
                     b.Navigation("Veilingstuk");
+                });
+
+            modelBuilder.Entity("SXDatalaag.Veilingstuk", b =>
+                {
+                    b.HasOne("SXDatalaag.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
                 });
 #pragma warning restore 612, 618
         }

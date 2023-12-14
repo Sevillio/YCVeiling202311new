@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SXDatalaag;
+using SXDatalaag.Migrations;
+using Veilingstuk = SXDatalaag.Veilingstuk;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,14 +22,16 @@ namespace Veiling2BE.Controllers
         public IEnumerable<Veilingstuk> Get()
         {
            Veilingstuk veilingstuk = new Veilingstuk();
-            veilingstuk.Name = "Mona lisa";
-            veilingstuk.Aanbieder = "Henk";
+           Account account = new Account();
+            veilingstuk.StukName = "Mona lisa";
+            veilingstuk.Aanbieder = account.Name;
             veilingstuk.Categorie = "Art";
             veilingstuk.Hoogte = 4;
             veilingstuk.Beschrijving = "Gemaakt door leonardo Davinci";
             veilingstuk.Lengte = 4;
             veilingstuk.Gewicht = 1;
             veilingstuk.Width = 3;
+            
             return _mdc.Veilingstuk;
         }
         
