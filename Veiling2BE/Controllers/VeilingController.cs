@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SXDatalaag;
 using SXDatalaag.Migrations;
+using System;
 using System.Diagnostics;
+using Veiling2BE;
+using static SXDatalaag.Veiling;
+using Veilingstuk = SXDatalaag.Veilingstuk;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,7 +19,7 @@ namespace Veiling2BE.Controllers
     {
         private DatabaseVeilingContext _mdc;
 
-        public VeilingController(DatabaseVeilingContext mdc) 
+        public VeilingController(DatabaseVeilingContext mdc)
         {
             _mdc = mdc;
         }
@@ -22,7 +27,7 @@ namespace Veiling2BE.Controllers
 
         // GET: api/<VeilingController>
         [HttpGet]
-        public  IEnumerable<Veiling> Get()
+        public IEnumerable<Veiling> Get()
         {
             Veiling veiling = new Veiling();
             veiling.StartDatumTijd = new DateTime(2023, 12, 1);
@@ -30,19 +35,18 @@ namespace Veiling2BE.Controllers
             veiling.OpeningsBod = 200;
             veiling.MinimumBod = 250;
             veiling.LaatsteBod = 299;
-            Veilingstuk vs = _mdc.Veilingstuk.FirstOrDefault(m => m.Id == 1);
-            veiling.Veilingstuk = vs;
-            _mdc.Add(veiling); //= veiling.Veilingstuk.Id;
+            Veilingstuk veilingstuk = new();
+            veiling.VeilingstukId = veilingstuk.Id;
+
             _mdc.SaveChanges();
             return _mdc.Veiling;
         }
 
         [HttpPost("abc/{vsId}")]
-        public IEnumerable<Veiling> Getveiling([FromBody] Veiling veiling, int vsId)
+        public IEnumerable<Veiling> Getveiling([FromBody] Veiling veiling)
         {
-            Veilingstuk vs = _mdc.Veilingstuk.FirstOrDefault(m => m.Id == vsId);
-            veiling.Veilingstuk = vs;
-            _mdc.Add(veiling); //= veiling.Veilingstuk.Id;
+
+            _mdc.Add(veiling);
             _mdc.SaveChanges();
             return _mdc.Veiling;
 
@@ -50,7 +54,7 @@ namespace Veiling2BE.Controllers
 
         // GET api/<VeilingController>/5
         [HttpGet("{id:int}")]
-        public string Get(int id)
+        public string Get(int id, Veiling veiling)
         {
 
             return "value";
@@ -59,11 +63,11 @@ namespace Veiling2BE.Controllers
 
         // POST api/<VeilingController>
         [HttpPost]
-        public void Post([FromBody] Veiling value)
+        public void Post([FromBody] Veiling veiling)
         {
-            Console.WriteLine("Hoi:"+value.Duratie);
-            Debug.WriteLine(value.Duratie);
-            _mdc.Add(value);
+
+
+            _mdc.Add(veiling);
             _mdc.SaveChanges();
 
             return;
@@ -74,7 +78,7 @@ namespace Veiling2BE.Controllers
         public void Put(int id, [FromBody] string value)
         {
 
-            
+
             _mdc.SaveChanges(true);
             return;
         }
@@ -83,8 +87,11 @@ namespace Veiling2BE.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _mdc.Remove(id);
-            return; 
+
+            {
+                _mdc.Remove(id);
+                return;
+            }
         }
     }
 }

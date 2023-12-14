@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +10,11 @@ namespace SXDatalaag
 {
     public class Veilingstuk
     {
-        public  int Id { get; set; }
-        public string Name { get; set; }
-        public string Aanbieder {  get; set; }
+
+        [Key]
+        public int Id { get; set; }
+        public string StukName { get; set; }
+        public string Aanbieder { get; set; }
         public string Categorie { get; set; }
         public string Beschrijving { get; set; }
 
@@ -19,5 +23,8 @@ namespace SXDatalaag
         public int Width { get; set; }
         public int Hoogte { get; set; }
         
+  
+        
     }
+      
 }

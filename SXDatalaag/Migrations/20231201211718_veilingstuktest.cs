@@ -21,7 +21,7 @@ namespace SXDatalaag.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StukName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Aanbieder = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Categorie = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Beschrijving = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -29,6 +29,7 @@ namespace SXDatalaag.Migrations
                     Lengte = table.Column<int>(type: "int", nullable: false),
                     Width = table.Column<int>(type: "int", nullable: false),
                     Hoogte = table.Column<int>(type: "int", nullable: false)
+
                 },
                 constraints: table =>
                 {
