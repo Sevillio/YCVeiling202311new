@@ -22,6 +22,7 @@ namespace SXDatalaag
         public int Lengte { get; set; }
         public int Width { get; set; }
         public int Hoogte { get; set; }
+        public string Image { get; set; }
         
   
         
