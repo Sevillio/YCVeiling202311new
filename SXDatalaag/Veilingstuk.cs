@@ -24,8 +24,6 @@ namespace SXDatalaag
         public int Hoogte { get; set; }
         public string Image { get; set; }
         
-        public string Image { get; set; }
-  
         
     }
       
