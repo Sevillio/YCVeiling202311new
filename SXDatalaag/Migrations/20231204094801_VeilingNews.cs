@@ -9,7 +9,7 @@ namespace SXDatalaag.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
+                name: "StukName",
                 table: "Veilingstuk",
                 type: "nvarchar(max)",
                 nullable: false,
@@ -52,7 +52,7 @@ namespace SXDatalaag.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
+                name: "StukName",
                 table: "Veilingstuk",
                 type: "nvarchar(max)",
                 nullable: true,

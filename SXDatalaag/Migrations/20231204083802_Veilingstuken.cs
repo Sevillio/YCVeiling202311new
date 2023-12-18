@@ -23,7 +23,7 @@ namespace SXDatalaag.Migrations
                 newName: "IX_Veiling_VeilingstukId");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
+                name: "StukName",
                 table: "Veilingstuk",
                 type: "nvarchar(max)",
                 nullable: true,
@@ -87,7 +87,7 @@ namespace SXDatalaag.Migrations
                 newName: "IX_Veiling_veilingstukId");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
+                name: "StukName",
                 table: "Veilingstuk",
                 type: "nvarchar(max)",
                 nullable: false,

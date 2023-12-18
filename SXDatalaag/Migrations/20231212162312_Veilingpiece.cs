@@ -13,7 +13,7 @@ namespace SXDatalaag.Migrations
                 table: "Veiling");
 
             migrationBuilder.RenameColumn(
-                name: "Name",
+                name: "StukName",
                 table: "Veilingstuk",
                 newName: "StukName");
 

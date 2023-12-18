@@ -25,7 +25,7 @@ namespace Veiling2BE.Controllers
         {
             Account account = new Account();
             account.Name = "Sev";
-            account.Password = "";
+            account.Password = "password";
             account.Email = "test@mail.com";
             account.Telefoon = "06xxxxxxxx";
             account.Postcode = "1100";
@@ -52,7 +52,7 @@ namespace Veiling2BE.Controllers
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Account acountc)
+        public void Put(int id, [FromBody] Account account)
         {
             _mdc.SaveChanges(true);
             return;

@@ -35,6 +35,15 @@ namespace Veiling2BE.Controllers
             veiling.OpeningsBod = 200;
             veiling.MinimumBod = 250;
             veiling.LaatsteBod = 299;
+            Veilingstatus veilingstatus= new Veilingstatus();
+            veilingstatus = Veilingstatus.scheduled;
+            Veilingstatus veilingstatus1 = new Veilingstatus();
+            veilingstatus1 = Veilingstatus.open;
+            Veilingstatus veilingstatus2 = new Veilingstatus();
+            veilingstatus2 = Veilingstatus.closed;
+            veiling.Status = veilingstatus;
+            veiling.Status = veilingstatus1;
+            veiling.Status = veilingstatus2;
             Veilingstuk veilingstuk = new();
             veiling.VeilingstukId = veilingstuk.Id;
 
