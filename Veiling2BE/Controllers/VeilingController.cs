@@ -5,6 +5,7 @@ using SXDatalaag;
 using SXDatalaag.Migrations;
 using System;
 using System.Diagnostics;
+using System.Threading;
 using Veiling2BE;
 using static SXDatalaag.Veiling;
 using Veilingstuk = SXDatalaag.Veilingstuk;
@@ -30,20 +31,23 @@ namespace Veiling2BE.Controllers
         public IEnumerable<Veiling> Get()
         {
             Veiling veiling = new Veiling();
-            veiling.StartDatumTijd = new DateTime(2023, 12, 1);
-            veiling.Duratie = 5;
+            veiling.StartDatumTijd = new DateTime();
+            veiling.EndDatumtijd = new DateTime();
+            
             veiling.OpeningsBod = 200;
-            veiling.MinimumBod = 250;
-            veiling.LaatsteBod = 299;
-            Veilingstatus veilingstatus= new Veilingstatus();
-            veilingstatus = Veilingstatus.scheduled;
-            Veilingstatus veilingstatus1 = new Veilingstatus();
-            veilingstatus1 = Veilingstatus.open;
-            Veilingstatus veilingstatus2 = new Veilingstatus();
-            veilingstatus2 = Veilingstatus.closed;
-            veiling.Status = veilingstatus;
-            veiling.Status = veilingstatus1;
-            veiling.Status = veilingstatus2;
+                if (veiling.StartDatumTijd < DateTime.Now)
+                {
+                    veiling.Status = Veilingstatus.Scheduled.ToString();
+                }
+                else if (veiling.StartDatumTijd >= DateTime.Now && DateTime.Now <= veiling.EndDatumtijd)
+                {
+                    veiling.Status = Veilingstatus.Open.ToString();
+                }
+                else
+                {
+                    veiling.Status = Veilingstatus.Closed.ToString();
+                }
+            veiling.Status = "";
             Veilingstuk veilingstuk = new();
             veiling.VeilingstukId = veilingstuk.Id;
 
@@ -84,11 +88,14 @@ namespace Veiling2BE.Controllers
 
         // PUT api/<VeilingController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Veiling veiling)
         {
-
-
-            _mdc.SaveChanges(true);
+            var existingVeiling = _mdc.Find<Veiling>(id);
+            if (existingVeiling != null)
+            {
+                _mdc.Entry(existingVeiling).CurrentValues.SetValues(veiling);
+                _mdc.SaveChanges();
+            }
             return;
         }
 
@@ -96,11 +103,14 @@ namespace Veiling2BE.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var veiling = _mdc.Find<Veiling>(id);
+            if (veiling != null)
 
             {
                 _mdc.Remove(id);
-                return;
+                _mdc.SaveChanges();
             }
+            return;
         }
     }
 }

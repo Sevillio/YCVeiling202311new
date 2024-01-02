@@ -52,17 +52,48 @@ namespace Veiling2BE.Controllers
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Account account)
+        public void Put(int id, [FromBody] Account updatedAccount)
         {
-            _mdc.SaveChanges(true);
-            return;
+            try
+            {
+                var existingAccount = _mdc.Find<Account>(id);
+
+                if (existingAccount == null)
+                {
+                  NotFound(); // Return a 404 Not Found if the entity with the given ID is not found
+                }
+
+                // Explicitly update only the properties you want to allow the client to modify
+                existingAccount.Name = updatedAccount.Name;
+                existingAccount.Email = updatedAccount.Email;
+                existingAccount.Telefoon = updatedAccount.Telefoon;
+                existingAccount.Address = updatedAccount.Address;
+                existingAccount.Place = updatedAccount.Place;
+                existingAccount.Postcode = updatedAccount.Postcode;
+                // Update other properties as needed
+
+                _mdc.SaveChanges(true);
+
+                NoContent(); // Return a 204 No Content upon successful update
+            }
+            catch (Exception ex)
+            {
+                // Log the exception and return a 500 Internal Server Error response
+                // Alternatively, return a more user-friendly error message
+                StatusCode(500, $"An error occurred: {ex.Message}");
+            }
         }
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _mdc.SaveChanges(true);
+            var existingaccount = _mdc.Find<Account>(id);
+            if (existingaccount != null)
+            {
+                _mdc.Remove(id);
+                _mdc.SaveChanges();
+            }
             return;
            
         }

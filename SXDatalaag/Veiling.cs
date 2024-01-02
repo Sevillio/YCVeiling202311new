@@ -15,16 +15,24 @@ namespace SXDatalaag
 
         public int Id { get; set; }
         public DateTime StartDatumTijd { get; set; }
-        public enum Veilingstatus { scheduled, open, closed } 
-        public int Duratie { get; set; }
+
+        public DateTime EndDatumtijd { get; set; }
+
+        public enum Veilingstatus
+        {
+            Scheduled,
+            Open,
+            Closed
+            
+        }
+        public string Status { get; set; }
+     
         public int OpeningsBod { get; set; }
-        public int LaatsteBod { get; set; }
-        public int MinimumBod { get; set; }
+        
         public int VeilingstukId { get; set; }
 
         [ForeignKey("VeilingstukId")]
         public Veilingstuk Veilingstuk { get; set; }
-        public Veilingstatus Status { get; set; }
     }
 
 }

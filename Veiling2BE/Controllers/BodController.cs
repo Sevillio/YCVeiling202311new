@@ -22,6 +22,8 @@ namespace Veiling2BE.Controllers
         {
             Bod bod = new Bod();
             bod.Prijs = 0;
+            bod.MinimumBod = (int)(bod.LaatsteBod * 1.15);
+            bod.LaatsteBod = (int) bod.Prijs;
             Veiling veiling = new Veiling();
             bod.VeilingId = veiling.Id;
             Account account = new Account();
@@ -47,15 +49,29 @@ namespace Veiling2BE.Controllers
 
         // PUT api/<BodController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Bod Bod)
         {
+            var existingBod = _mdc.Find<Bod>(id);
+
+            if (existingBod != null)
+            {
+                _mdc.Entry(existingBod).CurrentValues.SetValues(Bod);
+                _mdc.SaveChanges();
+            }
+            return;
         }
 
         // DELETE api/<BodController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _mdc.Remove(id);
+            var bodToDelete = _mdc.Find<Bod>(id);
+
+            if (bodToDelete != null)
+            {
+                _mdc.Remove(bodToDelete);
+                _mdc.SaveChanges();
+            }
             return;
         }
     }
