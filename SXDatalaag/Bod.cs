@@ -12,6 +12,9 @@ namespace SXDatalaag
         public int id {  get; set; }
         public int Prijs {  get; set; }
 
+        public int LaatsteBod { get; set; }
+        public int MinimumBod { get; set; }
+
         public int AccountId { get; set; }
         public int VeilingId { get; set; }
 

@@ -57,16 +57,30 @@ namespace Veiling2BE.Controllers
 
         // PUT api/<VeilingstukController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Veilingstuk value)
+        public void Put(int id, [FromBody] Veilingstuk veilingstuk)
         {
-                
+            var existingVeilingstuk = _mdc.Find<Veilingstuk>(id);
+            if (existingVeilingstuk != null)
+            {
+                _mdc.Entry(existingVeilingstuk).CurrentValues.SetValues(veilingstuk);
+                _mdc.SaveChanges();
+            }
+            return;
+
         }
 
         // DELETE api/<VeilingstukController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _mdc.Remove(id);
+            var veilingstuk = _mdc.Find<Veilingstuk>(id);
+            if (veilingstuk != null)
+
+            {
+                _mdc.Remove(id);
+                _mdc.SaveChanges();
+            }
+            return;
         }
     }
 }

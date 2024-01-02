@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SXDatalaag;
 
@@ -11,9 +12,10 @@ using SXDatalaag;
 namespace SXDatalaag.Migrations
 {
     [DbContext(typeof(DatabaseVeilingContext))]
-    partial class DatabaseVeilingContextModelSnapshot : ModelSnapshot
+    [Migration("20231220204616_Veilingnewtimestatus")]
+    partial class Veilingnewtimestatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,12 +76,6 @@ namespace SXDatalaag.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LaatsteBod")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MinimumBod")
-                        .HasColumnType("int");
-
                     b.Property<int>("Prijs")
                         .HasColumnType("int");
 
@@ -103,8 +99,17 @@ namespace SXDatalaag.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("Duratie")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EndDatumtijd")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("LaatsteBod")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinimumBod")
+                        .HasColumnType("int");
 
                     b.Property<int>("OpeningsBod")
                         .HasColumnType("int");
@@ -112,9 +117,8 @@ namespace SXDatalaag.Migrations
                     b.Property<DateTime>("StartDatumTijd")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("VeilingstukId")
                         .HasColumnType("int");
