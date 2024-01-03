@@ -22,8 +22,8 @@ namespace SXDatalaag
         [ForeignKey("AccountId")]
         public Account Account { get; set; }
 
-        [ForeignKey("VeilingId")]
-        public Veiling Veiling { get; set; }
+        [ForeignKey("VeilingstukId")]
+        public Veilingstuk Veilingstuk { get; set; }
 
     }
 }

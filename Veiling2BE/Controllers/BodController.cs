@@ -24,8 +24,8 @@ namespace Veiling2BE.Controllers
             bod.Prijs = 0;
             bod.MinimumBod = (int)(bod.LaatsteBod * 1.15);
             bod.LaatsteBod = (int) bod.Prijs;
-            Veiling veiling = new Veiling();
-            bod.VeilingId = veiling.Id;
+            Veilingstuk veilingstuk = new Veilingstuk();
+            bod.id = veilingstuk.Id;
             Account account = new Account();
             bod.AccountId = account.Id;
             return _mdc.Bod;
