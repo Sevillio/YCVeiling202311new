@@ -16,7 +16,7 @@ namespace SXDatalaag
         public int MinimumBod { get; set; }
 
         public int AccountId { get; set; }
-        public int VeilingId { get; set; }
+        public int VeilingstukId { get; set; }
 
 
         [ForeignKey("AccountId")]

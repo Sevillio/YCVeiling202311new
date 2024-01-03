@@ -41,9 +41,9 @@ namespace SXDatalaag
                  .IsRequired();
 
             modelBuilder.Entity<Bod>()
-                 .HasOne(v => v.Veiling)
+                 .HasOne(v => v.Veilingstuk)
                  .WithMany()
-                 .HasForeignKey(v => v.VeilingId)
+                 .HasForeignKey(v => v.VeilingstukId)
                  .IsRequired();
 
           
