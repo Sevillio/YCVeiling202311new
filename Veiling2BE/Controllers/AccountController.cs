@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using SXDatalaag;
 using System.Diagnostics.CodeAnalysis;
+using Veiling2BE.Controllers.DTO;
+using System.Diagnostics;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -96,6 +98,13 @@ namespace Veiling2BE.Controllers
             }
             return;
            
+        }
+        [HttpPost("testfelix")]
+        public void Post([FromBody] FelixDTO fdto)
+        {
+            Debug.WriteLine("hoi");
+
+            return;
         }
     }
 }
